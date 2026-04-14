@@ -1,0 +1,13 @@
+{
+    "nombre": "Mi escala Radiación",
+    "variable": "Rg",
+    "rangos": [
+        { "min": -1e99, "max": 15, "color": "rgb(255, 228, 181)", "label": "< 15" },
+        { "min": 15, "max": 16, "color": "rgb(255, 200, 150)", "label": "15 - 16" },
+        { "min": 16, "max": 17, "color": "rgb(255, 165, 100)", "label": "16 - 17" },
+        { "min": 17, "max": 18, "color": "rgb(255, 140, 50)", "label": "17 - 18" },
+        { "min": 18, "max": 19, "color": "rgb(255, 100, 0)", "label": "18 - 19" },
+        { "min": 19, "max": 20, "color": "rgb(255, 69, 0)", "label": "19 - 20" },
+        { "min": 20, "max": 1e99, "color": "rgb(255, 0, 0)", "label": "> 20" }
+    ]
+}

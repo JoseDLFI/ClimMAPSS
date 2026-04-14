@@ -1,0 +1,21 @@
+{
+    "nombre": "Precipitación (mm)",
+    "variable": "rr",
+    "rangos": [
+        { "min": -1e99, "max": 5, "color": "rgb(255, 255, 255)", "label": "<5" },
+        { "min": 5, "max": 10, "color": "rgb(230, 242, 255)", "label": "5-10" },
+        { "min": 10, "max": 25, "color": "rgb(204, 229, 255)", "label": "10-25" },
+        { "min": 25, "max": 50, "color": "rgb(179, 217, 255)", "label": "25-50" },
+        { "min": 50, "max": 75, "color": "rgb(153, 204, 255)", "label": "50-75" },
+        { "min": 75, "max": 100, "color": "rgb(128, 191, 255)", "label": "75-100" },
+        { "min": 100, "max": 125, "color": "rgb(102, 179, 255)", "label": "100-125" },
+        { "min": 125, "max": 150, "color": "rgb(77, 166, 255)", "label": "125-150" },
+        { "min": 150, "max": 175, "color": "rgb(51, 153, 255)", "label": "150-175" },
+        { "min": 175, "max": 200, "color": "rgb(26, 140, 255)", "label": "175-200" },
+        { "min": 200, "max": 225, "color": "rgb(0, 128, 255)", "label": "200-225" },
+        { "min": 225, "max": 250, "color": "rgb(0, 102, 204)", "label": "225-250" },
+        { "min": 250, "max": 300, "color": "rgb(0, 77, 153)", "label": "250-300" },
+        { "min": 300, "max": 600, "color": "rgb(0, 51, 102)", "label": "300-600" },
+        { "min": 600, "max": 1e99, "color": "rgb(0, 25, 51)", "label": ">600" }
+    ]
+}

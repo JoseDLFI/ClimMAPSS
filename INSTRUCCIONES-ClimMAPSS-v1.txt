@@ -1,0 +1,511 @@
+==================================================
+ClimMAPSS v1.0
+==================================================
+
+Desarrollado para Centro Meteorológico Provincial Sancti Spíritus, Cuba
+Por: José Alberto de la Fé Isaac
+
+==================================================
+¿QUÉ ES ClimMAPSS?
+==================================================
+
+ClimMAPSS es un mini Sistema de Información Geográfica (SIG) liviano 
+para meteorología. Genera mapas interpolados (SPI, temperatura, 
+precipitación, etc.) a partir de tus archivos CSV o Excel.
+
+Características principales:
+- 100% OFFLINE (no necesita internet)
+- NO se instala (solo abres un archivo)
+- Corre en equipos con recursos limitados (2GB RAM)
+- Respeta tu privacidad (los datos NO salen de tu PC)
+
+ClimMAPSS está diseñado específicamente para hardware limitado. Corre en equipos con 2GB de RAM y procesadores Intel Atom, donde otros SIG (como ArcGIS Pro o QGIS con complementos avanzados) simplemente no funcionan o van demasiado lentos.
+
+==================================================
+¿QUÉ NECESITO?
+==================================================
+
+- Una computadora con al menos 2GB de RAM
+- Un navegador web (Firefox recomendado)
+- Los archivos de este ZIP (no los muevas de lugar)
+
+==================================================
+NAVEGADORES RECOMENDADOS
+==================================================
+
+✅ Mozilla Firefox (recomendado, tiempos reales)
+✅ Google Chrome (funciona, pero puede mostrar tiempos falsos)
+❌ Microsoft Edge (no funciona)
+❌ Internet Explorer (no funciona)
+
+Para pruebas de rendimiento confiables, use Firefox.
+
+==================================================
+CÓMO ABRIR ClimMAPSS
+==================================================
+
+1. Extrae (descomprime) la carpeta ClimMAPSS_v1.0
+2. Entra a la carpeta
+3. Haz doble clic en ClimMAPSS_v1.0.html
+4. Se abrirá el programa en tu navegador
+
+¡Ya está! No necesitas hacer nada más.
+
+==================================================
+CÓMO USARLA (PASO A PASO)
+==================================================
+
+--------------------------------------------------
+PASO 1: ABRIR LA APLICACIÓN
+--------------------------------------------------
+
+- Doble clic en "ClimMAPSS_v1.0.html"
+- Se abrirá en tu navegador web (Firefox recomendado)
+- Verás la interfaz dividida en dos paneles:
+  * Izquierda: Controles, configuración, filtros y botones
+  * Derecha: Área donde se mostrarán los mapas generados
+
+--------------------------------------------------
+PASO 2: CARGAR TUS DATOS (CSV o Excel)
+--------------------------------------------------
+
+- Haz clic en "Seleccionar Datos"
+- Puedes elegir UNO o VARIOS archivos a la vez
+- Cada archivo generará un mapa independiente
+- Verás la lista de archivos cargados debajo del botón
+
+REQUISITOS del archivo:
+- Debe tener columnas LON y LAT (grados decimales, WGS84)
+- Debe tener al menos una columna numérica (SPI, Temperatura, etc.)
+- Opcional: columnas de texto (provincia, municipio...) para filtrar
+- Codificación UTF-8 si usas tildes o eñes
+
+--------------------------------------------------
+PASO 3: CARGAR CAPAS GEOGRÁFICAS (opcional pero recomendado)
+--------------------------------------------------
+
+ClimMAPSS necesita una CAPA DE RECORTE para definir los límites del mapa.
+
+- Botón "Cargar Capa de Recorte" → OBLIGATORIA (si no usas Sancti Spíritus)
+- Botón "Cargar División Administrativa" → OPCIONAL (municipios, distritos)
+
+⚠️ IMPORTANTE:
+- Si NO cargas ninguna capa, ClimMAPSS usa Sancti Spíritus (precargado)
+- Para trabajar con otra provincia o país (Holguín, Santiago, etc.) DEBES cargar
+  tu propia capa de recorte
+
+FORMATOS SOPORTADOS:
+- GeoJSON (.geojson, .json) → el más recomendado
+- Shapefile: Necesitas los TRES archivos (.shp + .shx + .dbf) comprimidos en un .zip
+- DXF (.dxf)
+- BLN (.bln)
+
+--------------------------------------------------
+PASO 4: CONFIGURAR EL MAPA (antes de generar)
+--------------------------------------------------
+
+a) MÉTODO DE INTERPOLACIÓN:
+   - Kriging (esférico/exponencial/gaussiano): 
+     Esférico es el más común en meteorología
+   - IDW: más rápido en 10px, útil para pruebas o datos grandes
+   - Mapa de Puntos: NO interpola, dibuja los puntos directamente
+
+b) VARIABLE A INTERPOLAR (si hay varias columnas numéricas):
+   - Selecciona cuál quieres mapear (ej: SPI, Temperatura, Precipitación)
+
+c) LEYENDA:
+   - SPI, Déficit/Exceso RR, Temperatura, Precipitación, Humedad, Viento
+   - Automática: la app genera los rangos según los datos
+   - Personalizada: carga un archivo JSON con tus rangos y colores
+
+d) RESOLUCIÓN (Velocidad vs Calidad):
+   - 1px: máxima calidad (pixel a pixel), más lento (~60s)
+   - 10px: más rápido (~10s), calidad aceptable para pruebas
+   (Tiempos estimados en Intel Atom + 2 GB de RAM + 450 puntos)
+
+e) ELEMENTOS CARTOGRÁFICOS (opcionales):
+   - Marca "Rosa de los Vientos (Norte)"
+   - Marca "Barra de Escala"
+   - Marca "Cuadrícula (Lat/Lon)"
+   - Marca "División Administrativa" (si cargaste una capa)
+
+--------------------------------------------------
+PASO 5: FILTRAR DATOS (solo si tu archivo tiene columnas de texto)
+--------------------------------------------------
+
+- Selecciona "Columna a filtrar" (provincia, municipio, estación...)
+- Selecciona "Valor a filtrar" (Sancti Spíritus, Trinidad, etc.) o "Todos"
+- Ejemplo: si filtras provincia = "Sancti Spíritus", solo se usarán esos puntos
+
+NOTA: La aplicación viene preconfigurada con Sancti Spíritus. 
+Si tu archivo tiene columna "provincia", el filtro se pondrá automático.
+
+--------------------------------------------------
+PASO 6: GENERAR MAPAS
+--------------------------------------------------
+
+- Haz clic en "Generar Mapas"
+- Si cargaste varios archivos, se generarán uno detrás de otro
+- Espera a que termine (el tiempo varía según puntos y resolución)
+- Los mapas aparecerán en el panel derecho, cada uno con su nombre
+
+IMPORTANTE:
+- Si cambias el método, variable, leyenda, resolución o filtro
+  DEBES hacer clic en "Generar Mapas" OTRA VEZ
+- La app NO actualiza los mapas automáticamente
+
+--------------------------------------------------
+PASO 7: INTERPRETAR LOS MAPAS
+--------------------------------------------------
+
+- Cada mapa tiene su propia leyenda de colores a la derecha
+- Los valores siguen la escala de la leyenda seleccionada
+
+En modo MAPA DE PUNTOS (si seleccionaste ese método):
+- Opción "malla": regenera la cuadrícula exportada (cuadros por celda)
+- Opción "puntos": dibuja estaciones reales (círculos rellenos)
+
+--------------------------------------------------
+PASO 8: EXPORTAR RESULTADOS
+--------------------------------------------------
+
+a) PNG individual:
+   - Botón "PNG" debajo de cada mapa
+   - Descarga el mapa como imagen PNG
+
+b) CSV de la malla interpolada (solo en modo interpolación):
+   - Botón "CSV" debajo del mapa
+   - Exporta LON, LAT, VALOR_INTERPOLADO
+   - Útil para usar en otros programas (Surfer, QGIS, futuro Modo Avanzado de ClimMAPSS)
+
+c) Todos los PNG juntos:
+   - Botón "Descargar Mapas" (general, en la parte inferior)
+   - Descarga TODOS los mapas generados como PNG individuales
+
+--------------------------------------------------
+PASO 9: MODO AVANZADO (demo)
+--------------------------------------------------
+
+- Botón "Modo Avanzado" → cambia la interfaz (logo y favicon)
+- Las herramientas (Álgebra de Mapas, Estadísticas Zonales) NO están implementadas
+- Botón "Volver a modo General" para regresar
+
+==================================================
+ARCHIVOS DE EJEMPLO
+==================================================
+
+La carpeta "ejemplo-datos" incluye archivos para probar las
+diferentes funcionalidades de ClimMAPSS.
+
+--------------------------------------------------
+MÚLTIPLES ARCHIVOS A LA VEZ (LOTE)
+--------------------------------------------------
+
+Los archivos con la misma estructura pueden procesarse juntos.
+Selecciona varios archivos a la vez con "Seleccionar Datos".
+
+Ejemplo para lotes:
+- estructura_simple_SSP-8pts-1.xlsx
+- estructura_simple_SSP-8pts-2.csv
+(ambos tienen las mismas columnas: LON, LAT, variable)
+
+IMPORTANTE: Útil para series temporales. Para usar esta funcionalidad, TODOS los archivos deben
+tener EXACTAMENTE la misma estructura (mismas columnas, mismo delimitador, mismo tipo de datos, la variable de todos los archivos debe ser la misma y tener el mismo nombre). SOLO en el caso de la variable SPI se permite que tengan nombres distintos (SPI1, SPI3, SPI6...).
+
+--------------------------------------------------
+ARCHIVOS DISPONIBLES
+--------------------------------------------------
+
+1. estructura_simple_SSP-8pts-1.xlsx
+2. estructura_simple_SSP-8pts-2.csv
+   → 8 puntos con una variable (Radiación)
+   → Útil para probar modo lote (misma estructura, distintos valores)
+   → También para escala automática o cargar leyenda JSON
+
+3. estructura_simple_Cuba_36pts.csv
+   → 36 puntos distribuidos en toda Cuba
+   → Útil para probar recorte con GeoJSON de Cuba
+
+4. estructura_simple_SSP-450pts.csv
+   → 450 puntos, grid denso de Sancti Spíritus
+   → Ideal para pruebas de rendimiento (kriging 1px / 10px)
+
+5. estructura_complejo_SSP+CFG-8pts.csv
+   → 8 puntos con múltiples variables (RR, SPI, T)
+   → Incluye columna "provincia" para filtrar
+   → Útil para probar filtros y selector de variables
+
+--------------------------------------------------
+ARCHIVOS GEOJSON (RECORTE Y DIVISIÓN ADMINISTRATIVA)
+--------------------------------------------------
+
+La carpeta "ejemplo-geojson/" incluye mapas de Cuba. Aquí puedes encontrar
+TODAS las provincias (incluso con sus municipios) para utilizar
+como "Capa de recorte" o "Capa de División Administrativa".
+
+⚠️ IMPORTANTE:
+- La CAPA DE RECORTE es OBLIGATORIA. Sin ella, el mapa no tiene límites.
+- Si NO cargas ninguna capa, ClimMAPSS usa Sancti Spíritus (precargado).
+- Para trabajar con otra provincia (Holguín, Santiago, etc.) DEBES cargar
+  tu propia capa de recorte.
+
+ARCHIVOS INCLUIDOS:
+
+6. cuba_completa.geojson
+   → Mapa de toda Cuba con límites provinciales
+   → Útil como capa de recorte para mapas nacionales
+
+7. region_central.geojson
+   → Recorte de la región central (modificado por ClimMAPSS)
+   → Ideal para análisis regionales
+
+Además, encontrarás GeoJSON de TODAS las provincias y sus municipios,
+cortesía de Yudivián Almeida Cruz (MIT License).
+
+¿CÓMO USAR ESTOS ARCHIVOS?
+
+- Botón "Cargar Capa de Recorte" → selecciona el GeoJSON de la provincia
+  (El mapa se recortará automáticamente a los límites del archivo)
+
+- Botón "Cargar División Administrativa" → selecciona el GeoJSON de municipios
+  (Se mostrará la capa con los municipios de esa provincia)
+
+FORMATOS SOPORTADOS (además de GeoJSON):
+- Shapefile: Necesitas los TRES archivos (.shp + .shx + .dbf) comprimidos en un .zip
+- DXF (.dxf)
+- BLN (.bln)
+
+--------------------------------------------------
+ARCHIVOS DE LEYENDA PERSONALIZADA (JSON)
+--------------------------------------------------
+
+La carpeta "ejemplo-leyendas-json/" contiene ejemplos de archivos JSON.
+
+8. Leyenda-RR-ejemplo.json      → Precipitación (mm)
+9. Leyenda-Rg-ejemplo.json      → Radiación (W/m²)
+10. Leyenda-Tm-ejemplo.json     → Temperatura media (°C)
+11. Leyenda-VV-ejemplo.json     → Velocidad del viento (km/h)
+
+¿CÓMO USAR ESTOS ARCHIVOS?
+1. En "Leyenda / Clasificación", selecciona "Cargar leyenda personalizada"
+2. Clic en el botón "Cargar JSON de leyenda"
+3. Elige el archivo JSON de ejemplo
+4. La leyenda se cargará y estará disponible en el menú desplegable
+
+--------------------------------------------------
+NOTAS SOBRE LOS EJEMPLOS
+--------------------------------------------------
+
+- Todos los datos son ficticios (creados para pruebas)
+- Puedes usarlos libremente para familiarizarte con ClimMAPSS
+- La aplicación viene preconfigurada con Sancti Spíritus
+- Si tu archivo tiene columna "provincia", el filtro se autoselecciona, con valor "Sancti Spíritus".
+
+==================================================
+CREAR TU PROPIA ESCALA DE COLORES (JSON)
+==================================================
+
+¿Qué necesitas?
+- Bloc de notas (Windows) o cualquier editor de texto
+- Los archivos de ejemplo de la carpeta "ejemplo-leyendas-json/"
+
+--------------------------------------------------
+PASO 1: Copia este ejemplo en un archivo nuevo
+--------------------------------------------------
+
+{
+    "nombre": "Mi escala personalizada",
+    "variable": "rr",
+    "rangos": [
+        { "min": -1e99, "max": 0, "color": "rgb(255, 255, 255)", "label": "0" },
+        { "min": 0, "max": 10, "color": "rgb(200, 230, 255)", "label": "0-10" },
+        { "min": 10, "max": 25, "color": "rgb(150, 200, 255)", "label": "10-25" },
+        { "min": 25, "max": 50, "color": "rgb(100, 150, 255)", "label": "25-50" },
+        { "min": 50, "max": 75, "color": "rgb(50, 100, 255)", "label": "50-75" },
+        { "min": 75, "max": 100, "color": "rgb(0, 50, 200)", "label": "75-100" },
+        { "min": 100, "max": 1e99, "color": "rgb(0, 0, 150)", "label": ">100" }
+    ]
+}
+
+--------------------------------------------------
+PASO 2: Modifica lo que quieras
+--------------------------------------------------
+
+| Qué cambiar | Cómo se hacer                             | Ejemplo                         |
+|-------------|-------------------------------------------|---------------------------------|
+| Nombre      | Entre comillas después de "nombre"        | "nombre": "Lluvias en Santiago" |
+| Variable    | El nombre de tu columna en el CSV         | "variable": "RR"                |
+| Rangos      | Los valores mínimo y máximo de cada tramo | "min": 0, "max": 10             |
+| Colores     | En formato rgb(rojo, verde, azul)         | "color": "rgb(255, 0, 0)"       |
+| Etiquetas   | Lo que se ve en la escala                 | "label": "Muy seco"             |
+
+--------------------------------------------------
+PASO 3: Reglas importantes
+--------------------------------------------------
+
+1. Los rangos deben ir en orden (de menor a mayor valor)
+
+2. Usa números grandes para los extremos:
+   -1e99 = menos infinito (valores muy negativos)
+   1e99 = más infinito (valores muy positivos)
+
+3. Cada rango necesita: min, max, color, label
+
+4. Respeta las comas: después de cada rango (menos el último)
+
+--------------------------------------------------
+PASO 4: Guarda el archivo
+--------------------------------------------------
+
+- En Notepad: Archivo > Guardar como
+- Tipo: "Todos los archivos (*.*)"
+- Nombre: mi_escala.json (que termine en .json)
+- Codificación: UTF-8
+
+(Si no da la opción, guarda como .txt, luego cambia el nombre
+ sustituyendo ".txt" por ".json")
+
+--------------------------------------------------
+PASO 5: Cárgalo en ClimMAPSS
+--------------------------------------------------
+
+1. En el selector de leyendas, elige "Cargar leyenda personalizada"
+2. Haz clic en "Cargar JSON de leyenda"
+3. Selecciona tu archivo
+4. ¡Listo! Aparecerá en el selector con tu nombre
+
+--------------------------------------------------
+SI ALGO SALE MAL (el mapa se ve negro)
+--------------------------------------------------
+
+Abre el archivo en Notepad y revisa:
+
+- ¿Faltan comas? (entre rangos)
+- ¿Sobran comas? (después del último rango NO lleva)
+- ¿Los números tienen punto, no coma? (usar 0.5 no 0,5)
+- ¿Los colores son rgb(0,0,0)? (solo acepta ese formato)
+
+--------------------------------------------------
+TAMBIÉN PUEDES...
+--------------------------------------------------
+
+Si así lo prefieres:
+- Abre una de las escalas de ejemplo (carpeta ejemplo-leyendas-json/)
+- Modifica la escala con tus valores y etiquetas
+- Guarda los cambios
+- Usa tu leyenda personalizada en ClimMAPSS
+
+==================================================
+RENDIMIENTO (TIEMPOS REALES)
+==================================================
+
+TIEMPOS DE REFERENCIA (Procesador: Intel Atom; RAM: 2GB, Firefox)
+
+| Método  | Puntos | Resolución | Tiempo          |
+|---------|--------|------------|-----------------|
+| Kriging | 8      | 10px       | 0.26s           |
+| Kriging | 8      | 1px        | 7.3s            |
+| Kriging | 450    | 10px       | 16.0s           |
+| Kriging | 450    | 1px        | 65.0s           |
+| IDW     | 8      | 10px       | 0.55s           |
+| IDW     | 8      | 1px        | 29.5s           |
+| IDW     | 450    | 10px       | 12.0s           |
+| IDW     | 450    | 1px        | 950s (15.8 min) |
+
+NOTA: Estos tiempos fueron medidos en el equipo más lento disponible
+(Intel Atom 2GB, Firefox). Si tu computadora es más moderna, los tiempos serán más cortos.
+
+Recomendaciones:
+- Para menos de 500 puntos: usar Kriging 1px (calidad máxima)
+- Para más de 500 puntos: usar IDW 10px (rapidez)
+- Para más de 1500 puntos: evitar Kriging 1px (puede no terminar)
+
+==================================================
+NOTAS IMPORTANTES
+==================================================
+
+- 100% offline: Todo funciona en tu navegador, SIN INTERNET
+- Privacidad total: Los datos NUNCA salen de tu computadora
+- Tus archivos originales NO se modifican
+- Auto-detección inteligente de columnas LON, LAT y variables
+- El procesamiento de múltiples archivos es SECUENCIAL (no en paralelo)
+- Si cargas archivos con >4,000 puntos, la app aplica submuestreo
+- Para más detalles de rendimiento, consulta el README.md
+
+==================================================
+PROBLEMAS COMUNES Y SOLUCIONES
+==================================================
+
+| Problema                    | Posible causa                  | Solución                            |
+|-----------------------------|--------------------------------|-------------------------------------|
+| Los puntos no se ven        | Coordenadas fuera del recorte  | Aplica filtro por provincia         |
+| El mapa tarda mucho         | Muchos puntos + resolución 1px | Cambia a 10px o reduce datos        |
+| Las tildes se ven raras     | Archivo no está en UTF-8       | Guarda el CSV como UTF-8            |
+| El filtro no aparece        | No hay columnas de texto       | Agrega provincia o municipio al CSV |
+| Kriging no termina          | >1,800 puntos                  | Usa IDW 10px o reduce datos         |
+| Chrome se congela           | Navegador no recomendado       | Cambia a Firefox                    |
+| La interfaz se ve sin iconos| Sin internet                   | Normal, la app sigue funcionando    |
+
+==================================================
+SI VES UNA ADVERTENCIA DEL NAVEGADOR
+==================================================
+
+Es NORMAL. No te asustes.
+
+Cuando generas un mapa grande, el navegador puede decir:
+"Esta página está ralentizando el navegador"
+
+QUÉ HACER: Haz clic en "Esperar" o "Continuar"
+QUÉ NO HACER: No cierres la pestaña ni el navegador
+
+El mapa SEGUIRÁ generándose. Solo ten paciencia.
+
+En Firefox las advertencias son menos frecuentes.
+En Chrome pueden aparecer más a menudo.
+
+==================================================
+MARCAS Y PROPIEDAD INTELECTUAL
+==================================================
+
+El nombre "ClimMAPSS" y sus logotipos (incluyendo las variaciones 
+ClimMAPSS-logo-rr.png, ClimMAPSS-logo-spi.png y ClimMAPSS-logo-gris.png) 
+son propiedad de José Alberto de la Fé Isaac.
+
+Estos elementos no están cubiertos por la licencia MIT del código.
+Si deseas usar el nombre o el logotipo en un proyecto derivado o con fines comerciales,
+necesitas autorización expresa del autor.
+
+==================================================
+CRÉDITOS Y LICENCIAS (VERSIÓN RESUMIDA)
+==================================================
+
+ClimMAPSS fue desarrollado por José Alberto de la Fé Isaac
+para el Centro Meteorológico Provincial Sancti Spíritus, Cuba.
+
+Este programa usa código de las siguientes librerías (todas de código abierto):
+
+- Kriging.js (MIT License) - Modificado para navegador
+- Turf.js (MIT License) - Incluye MarchingSquares.js (AGPL v3)
+- shp.js (MIT License)
+- SheetJS / XLSX (Apache License 2.0)
+- object-assign (MIT License)
+- splaytree (MIT License)
+
+GeoJSON de Cuba: Yudivián Almeida Cruz (MIT License)
+
+ClimMAPSS se distribuye bajo Licencia MIT (ver README.md para texto completo).
+
+==================================================
+VERSIÓN
+==================================================
+
+ClimMAPSS v1.0 - Abril 2026
+
+==================================================
+¡GRACIAS POR USAR CLIMAPSS!
+==================================================
+
+Si encuentras algún problema o tienes sugerencias,
+consulta el archivo README.md o contacta al desarrollador.
+
+Para más información: https://github.com/JoseDLFI/climmapss
