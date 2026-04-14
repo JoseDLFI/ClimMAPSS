@@ -110,7 +110,7 @@ La carpeta `ejemplo-datos/` incluye archivos para probar las diferentes funciona
 | `estructura_simple_SSP-8pts-2.csv`     | 8   | 1         | Modo lote              |
 | `estructura_simple_Cuba_36pts.csv`     | 36  | 1         | Recorte con GeoJSON    |
 | `estructura_simple_SSP-450pts.csv`     | 450 | 1         | Pruebas de rendimiento |
-| `estructura_complejo_SSP+CFG-8pts.csv` | 8   | Múltiples | Filtros, variables     |
+| `estructura_complejo_SSP+CFG-8pts.csv` | 16  | Múltiples | Filtros, variables     |
 
 **Carpeta `ejemplo-geojson/`** (recorte y división administrativa):
 - GeoJSON de todas las provincias y municipios (cortesía de Yudivián Almeida Cruz)
@@ -148,8 +148,7 @@ Para series temporales (SPI1, SPI3, SPI6...):
 | Formato    | Uso                                             | Botón en interfaz |
 |------------|-------------------------------------------------|-------------------|
 | GeoJSON    | Recorte / División (.geojson, .json)            | Ambos             |
-| Shapefile  | Recorte / División (Necesita los TRES archivos  | Ambos             |
-|            | (.shp + .shx + .dbf) comprimidos en .zip)       |                   |
+| Shapefile  | Recorte / División (Necesita los TRES archivos (.shp + .shx + .dbf) comprimidos en .zip) | Ambos             |
 | DXF (.dxf) | Recorte / División                              | Ambos             |
 | BLN (.bln) | Recorte / División                              | Ambos             |
 
@@ -205,28 +204,26 @@ Ejemplo mínimo:
         { "min": 10, "max": 1e99, "color": "rgb(0,0,150)", "label": ">10" }
     ]
 }
-
-Reglas:
-
-    Rangos en orden (menor a mayor)
-
-    -1e99 = "menos infinito", 1e99 = "más infinito"
-
-    Colores en rgb(r,g,b) o #RRGGBB
+```
+**Reglas:**
+- Los rangos deben ir en orden (de menor a mayor valor)
+- Usa `-1e99` para "menos infinito" y `1e99` para "más infinito"
+- Cada rango necesita: `min`, `max`, `color`, `label`
+- Colores en formato `rgb(r,g,b)` o hexadecimal `#RRGGBB`
 
 Cómo cargarla: Leyenda → "Cargar leyenda personalizada" → seleccionar JSON
 Cambiar nombres de municipios (para otras provincias)
 
 Editar js/datos_locales.js:
-javascript
+```javascript
 
 window.nombresMunicipios = ["Municipio 1", "Municipio 2", ...];
 window.posicionesNombres = [
     { x: -80.45, y: 22.15 },
     { x: -80.33, y: 22.28 }
 ];
-
-🖼️ Galería de mapas
+```
+## 🖼️ Galería de mapas
 
 A continuación, algunos ejemplos reales de mapas creados con ClimMAPSS
 utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
