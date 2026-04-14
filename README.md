@@ -256,7 +256,7 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 
 ![Kriging 450pts](ejemplo-imagenes/climmapss-estructura_simple_SSP-450pts-SPI2-spherical.png)
 
-*En este mapa se observan píxeles negros debido al anti-aliasing del canvas por el alto contraste de colores.*
+*En este mapa se observan píxeles negros debido al anti-aliasing del canvas por el alto contraste de colores (solo observado en esta leyenda, no afecta el valor real de la celda en la interpolación, es solo un efecto visual).*
 
 ---
 
