@@ -112,6 +112,8 @@ La carpeta `ejemplo-datos/` incluye archivos para probar las diferentes funciona
 | `estructura_simple_SSP-450pts.csv`     | 450 | 1         | Pruebas de rendimiento |
 | `estructura_complejo_SSP+CFG-8pts.csv` | 16  | Múltiples | Filtros, variables     |
 
+> **Nota:** Todos los datos de ejemplo incluidos en este repositorio (carpeta `ejemplo-datos/`) son **ficticios**, creados únicamente para pruebas y familiarización con el software. Puedes usarlos libremente, pero no representan mediciones reales.
+
 **Carpeta `ejemplo-geojson/`** (recorte y división administrativa):
 - GeoJSON de todas las provincias y municipios (cortesía de Yudivián Almeida Cruz)
 - `cuba_completa.geojson` y `region_central.geojson` (modificados por ClimMAPSS)
@@ -223,7 +225,7 @@ window.posicionesNombres = [
     { x: -80.33, y: 22.28 }
 ];
 ```
-## 🖼️ Galería de mapas
+## Galería de mapas
 
 A continuación, algunos ejemplos reales de mapas creados con ClimMAPSS
 utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
@@ -235,8 +237,9 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 **Archivos:** `estructura_simple_SSP-8pts-1.xlsx` y `estructura_simple_SSP-8pts-2.csv`  
 **Método:** Kriging  
 
-![Mapa 8pts - Radiación1](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts-1-Radiación1-spherical.png)
-![Mapa 8pts - Radiación2](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts-2-Radiación2-spherical.png)
+| mapa 1                  | mapa 2                 |
+|-----------------------------------------------------|------------------------------------------------|
+| ![Mapa 8pts - Radiación1](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts-1-Radiación1-spherical.png) | ![Mapa 8pts - Radiación2](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts-2-Radiación2-spherical.png) |
 
 > Ambos generados en lote (misma estructura, misma variable). Escala automática.
 
@@ -254,7 +257,7 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 
 **Método:** Kriging a 10px  
 
-![Kriging 450pts](ejemplo-imagenes/climmapss-estructura_simple_SSP-450pts-SPI2-spherical.png)
+![Kriging 450pts](ejemplo-imagenes/climmapss-estructura_simple_SSP-450pts-SPI12-spherical.png)
 
 *En este mapa se observan píxeles negros debido al anti-aliasing del canvas por el alto contraste de colores (solo observado en esta leyenda, no afecta el valor real de la celda en la interpolación, es solo un efecto visual).*
 
@@ -272,7 +275,7 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 
 **Método:** IDW a 10px – Variable Temperatura  
 
-![IDW Temperatura Cienfuegos](ejemplo-imagenes/climmapss-estructura_complejo_SSP+CFGs-T-idw.png)
+![IDW Temperatura Cienfuegos](ejemplo-imagenes/climmapss-estructura_complejo_SSP+CFG-8pts-T-idw.png)
 
 ---
 
@@ -292,6 +295,8 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 **Malla exportada desde ClimMAPSS (1px) y regenerada a 1px**  
 
 ![Malla 1px regenerada 1px](ejemplo-imagenes/climmapss-climmapss-estructura_complejo_SSP+CFG-8pts-SPI-spherical-1px-malla-SPI_INTERPOLADO-scatter.png)
+
+> Al utilizar la misma leyenda el mapa resultante es copia fiel del original, al no tener que interpolar es mucho más rápido.
 
 **Malla exportada desde ClimMAPSS (1px) y regenerada a 10px**  
 
