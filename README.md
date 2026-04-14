@@ -236,7 +236,7 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 **Método:** Kriging  
 
 ![Mapa 8pts - Radiación1](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts-1-Radiación1-spherical.png)
-![Mapa 8pts - Radiación2](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts2-Radiación2-spherical.png)
+![Mapa 8pts - Radiación2](ejemplo-imagenes/climmapss-estructura_simple_SSP-8pts-2-Radiación2-spherical.png)
 
 > Ambos generados en lote (misma estructura, misma variable). Escala automática.
 
