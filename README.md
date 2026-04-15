@@ -30,7 +30,7 @@
 
 ## ¿Qué es ClimMAPSS?
 
-ClimMAPSS es un Sistema de Información Geográfica (SIG) de bajo costo computacional, diseñado específicamente para funcionar en equipos con recursos limitados (2GB RAM, Intel Atom) y en condiciones de total desconexión de internet.
+ClimMAPSS es un Sistema de Información Geográfica (SIG) de bajo costo computacional, diseñado específicamente para funcionar en equipos con recursos limitados (procesadores antiguos y poca memoria RAM) y en condiciones de total desconexión de internet.
 
 Genera mapas interpolados (SPI, temperatura, precipitación, etc.) a partir de archivos CSV o Excel, sin necesidad de instalar nada.
 
@@ -82,17 +82,18 @@ ClimMAPSS está diseñado específicamente para hardware limitado. Corre en equi
 
 ### 1. Cargar datos
 - Botón "Seleccionar Datos" → uno o varios archivos CSV o Excel
-- Deben tener columnas `LON` y `LAT` (grados decimales)
+- Deben tener columnas `LON` y `LAT` (grados decimales) y al menos una columna con valores numéricos 
 
 ### 2. Cargar capas geográficas
 - **Capa de Recorte (OBLIGATORIA):** Define los límites del mapa
 - **División Administrativa (OPCIONAL):** Dibuja municipios, distritos
-- Si no cargas nada, ClimMAPSS usa Sancti Spíritus (precargado)
+- Si no cargas nada, ClimMAPSS usa Sancti Spíritus (pre cargado por defecto)
 
 ### 3. Configurar el mapa
 - **Método:** Kriging (preciso), IDW (rápido) o Mapa de Puntos
 - **Resolución:** `1px` (calidad máxima) o `10px` (rápido)
 - **Leyenda:** SPI, Temperatura, Precipitación, Automática o Personalizada (JSON)
+- **Variable:** Si hay más de una columna numérica 
 
 ### 4. Generar y exportar
 - Botón "Generar Mapas"
@@ -115,7 +116,7 @@ La carpeta `ejemplo-datos/` incluye archivos para probar las diferentes funciona
 > **Nota:** Todos los datos de ejemplo incluidos en este repositorio (carpeta `ejemplo-datos/`) son **ficticios**, creados únicamente para pruebas y familiarización con el software. Puedes usarlos libremente, pero no representan mediciones reales.
 
 **Carpeta `ejemplo-geojson/`** (recorte y división administrativa):
-- GeoJSON de todas las provincias y municipios (cortesía de Yudivián Almeida Cruz)
+- GeoJSON de todas las provincias y municipios de Cuba (cortesía de Yudivián Almeida Cruz)
 - `cuba_completa.geojson` y `region_central.geojson` (modificados por ClimMAPSS)
 
 **Carpeta `ejemplo-leyendas-json/`** (escalas personalizadas):
@@ -126,7 +127,7 @@ La carpeta `ejemplo-datos/` incluye archivos para probar las diferentes funciona
 
 ### Modo lote (varios archivos a la vez)
 
-Para series temporales (SPI1, SPI3, SPI6...):
+Para series temporales:
 1. Mantén Ctrl (Windows) o Cmd (Mac)
 2. Selecciona los archivos con la **misma estructura**
 3. Haz clic en "Generar Mapas"
@@ -140,13 +141,13 @@ Para series temporales (SPI1, SPI3, SPI6...):
 ### Datos (CSV o Excel)
 | Columna requerida  | Descripción                  | Ejemplo |
 |--------------------|------------------------------|---------|
-| LON / Longitud / x | Longitud en grados decimales | -79.5   |
-| LAT / Latitud / y  | Latitud en grados decimales  | 21.8    |
+| LON / Longitud / x | Longitud en grados decimales | -79.55   |
+| LAT / Latitud / y  | Latitud en grados decimales  | 21.82    |
 | (variable)         | Valor numérico (T, RR, etc.) | 25.5    |
 
 **Delimitadores soportados:** coma (`,`), punto y coma (`;`), tabulación (`\t`), espacio (` `)
 
-### Capas geográficas (opcional)
+### Capas geográficas
 | Formato    | Uso                                             | Botón en interfaz |
 |------------|-------------------------------------------------|-------------------|
 | GeoJSON    | Recorte / División (.geojson, .json)            | Ambos             |
@@ -214,7 +215,8 @@ Ejemplo mínimo:
 - Colores en formato `rgb(r,g,b)` o hexadecimal `#RRGGBB`
 
 Cómo cargarla: Leyenda → "Cargar leyenda personalizada" → seleccionar JSON
-Cambiar nombres de municipios (para otras provincias)
+
+### Cambiar nombres de municipios (para otras provincias)
 
 Editar js/datos_locales.js:
 ```javascript
@@ -227,8 +229,7 @@ window.posicionesNombres = [
 ```
 ## Galería de mapas
 
-A continuación, algunos ejemplos reales de mapas creados con ClimMAPSS
-utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
+A continuación, algunos ejemplos reales de mapas creados con ClimMAPSS utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 
 ---
 
@@ -277,16 +278,19 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 
 ![IDW Temperatura Cienfuegos](ejemplo-imagenes/climmapss-estructura_complejo_SSP+CFG-8pts-T-idw.png)
 
+> La resolución 10px es ideal para pruebas rápidas 
 ---
 
 ### 🔹 Sancti Spíritus – 8 puntos (variable SPI)
 
 **Archivo:** `estructura_complejo_SSP+CFG-8pts.csv`  
+**Filtro:** provincia = "Sancti Spíritus"
+
 **Método:** Kriging a 1px  
 
 ![Kriging SPI 1px](ejemplo-imagenes/climmapss-estructura_complejo_SSP+CFG-8pts-SPI-spherical.png)
 
-> De este mapa se exportó el CSV de la malla para las pruebas de regeneración.
+> De este mapa se exportó el CSV de la malla para las pruebas de regeneración (este se obtiene al dar clic en el botón CSV debajo del mapa generado, no se incluye en los datos de ejemplo).
 
 ---
 
@@ -302,11 +306,11 @@ utilizando los archivos incluidos en la carpeta `ejemplo-datos/`.
 
 ![Malla 1px regenerada 10px](ejemplo-imagenes/climmapss-climmapss-estructura_complejo_SSP+CFG-8pts-SPI-spherical-1px-malla-SPI_INTERPOLADO-scatter(1).png)
 
-> ⚠️ No se puede regenerar una malla exportada a 10px en resolución 1px (la app respeta la resolución original del CSV).
+> ⚠️ Este proceso es posible, pero el caso contrario NO es posible (regenerar una malla exportada a 10px en resolución 1px, la app respeta la resolución original del CSV).
 
 ---
 
-### 🔹 Región central – 8 puntos (variable Temperatura)
+### 🔹 Región central – 16 puntos (variable Temperatura)
 
 **Archivo:** `estructura_complejo_SSP+CFG-8pts.csv`  
 **Capa de recorte:** `region_central.geojson`
